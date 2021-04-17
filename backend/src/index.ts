@@ -45,7 +45,7 @@ app.get("/embed/:id", async (req, res) => {
 	const embed = await getEmbedById(id);
 	if (!embed) return res.status(404).send(`Embed with id ${id} was not found`);
 
-	res.status(200).end(generateHtml(embed, req, id));
+	res.end(generateHtml(embed, req, id));
 });
 
 app.get("/embed", (req, res) => {
@@ -55,7 +55,7 @@ app.get("/embed", (req, res) => {
 			embed.title = "Send embeds safely";
 			embed.description = "Just head over to "; // TODO
 		}
-		res.status(200).end(generateHtml(embed, req));
+		res.end(generateHtml(embed, req));
 	} catch (error) {
 		if (error instanceof EmbedParseError) {
 			return res.status(400).end(error.message);
@@ -70,7 +70,7 @@ app.get("/oembed/:id.json", async (req, res) => {
 	const embed = await getEmbedById(id);
 	if (!embed) return res.status(404).send(`Embed with id ${id} was not found`);
 
-	res.status(200).end(JSON.stringify(embed.oembed));
+	res.end(JSON.stringify(embed.oembed));
 });
 
 app.get("/oembed", (req, res) => {
@@ -80,7 +80,7 @@ app.get("/oembed", (req, res) => {
 			embed.title = "Send embeds safely";
 			embed.description = "Just head over to "; // TODO
 		}
-		res.status(200).end(JSON.stringify(embed.oembed));
+		res.end(JSON.stringify(embed.oembed));
 	} catch (error) {
 		if (error instanceof EmbedParseError) {
 			return res.status(400).end(JSON.stringify({ code: 400, message: error.message }));
