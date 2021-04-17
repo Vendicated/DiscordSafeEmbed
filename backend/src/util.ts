@@ -4,14 +4,13 @@ import { htmlEncode } from "htmlencode";
 import querystring from "querystring";
 import { Embed } from "./types";
 
-export function getFullUrl(req: Request) {
-	return `${req.protocol}://${req.hostname}`;
+export function getFullUrl({ protocol, hostname }: Request) {
+	return `${protocol}://${hostname}`;
 }
 
-export function generateHtml(embed: Embed, host: string, id?: string) {
-	const oembedUrl = `${host}/oembed${id && host ? `/${id}.json` : `?${querystring.stringify(embed.oembed)}`}`;
-	return `
-    <!DOCTYPE html>
+export function generateHtml(embed: Embed, req: Request, id?: string) {
+	const oembedUrl = `${getFullUrl(req)}/oembed${id ? `/${id}.json` : `?${querystring.stringify(embed.oembed)}`}`;
+	return `<!DOCTYPE html>
     <html>
         <head>
             ${embed.title ? `<meta property="og:title" content="${htmlEncode(embed.title)}">` : ""}
