@@ -1,29 +1,29 @@
 name: test
 on: [push, pull_request]
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "15"
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: "15"
 
-      - name: Install base dependencies
-        run: |
-          yarn --frozen-lockfile
+            - name: Install base dependencies
+              run: |
+                  yarn --frozen-lockfile
 
-      - name: Install and build backend
-        working-directory: ./backend
-        run: |
-          yarn --frozen-lockfile
-          tsc
+            - name: Install and build backend
+              working-directory: ./backend
+              run: |
+                  yarn --frozen-lockfile
+                  tsc
 
-      - name: Install and build frontend
-        working-directory: ./frontend
-        run: |
-          yarn --frozen-lockfile
-          tsc
+            - name: Install and build frontend
+              working-directory: ./frontend
+              run: |
+                  yarn --frozen-lockfile
+                  tsc
 
-      - name: Lint
-        run: yarn lint
+            - name: Lint
+              run: yarn lint

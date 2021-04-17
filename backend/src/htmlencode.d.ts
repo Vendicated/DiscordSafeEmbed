@@ -1,3 +1,3 @@
 declare module "htmlencode" {
-	export function htmlEncode(str: string): string;
+    export function htmlEncode(str: string): string;
 }
