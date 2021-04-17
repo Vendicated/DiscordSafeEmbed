@@ -1,13 +1,10 @@
 node_modules
-dist
 
-tmp
+dist
+*.tsbuildinfo
+
 *.log
 logs
-
-# Keep those tokens save
-*.env
-config.json
 
 # Yarn better <3
 package-lock.json

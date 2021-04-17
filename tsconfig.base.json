@@ -1,0 +1,22 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"composite": true,
+		"declaration": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
+		"inlineSourceMap": true,
+		"inlineSources": false,
+		"lib": ["esnext", "esnext.array", "esnext.asynciterable", "esnext.intl", "esnext.symbol", "dom"],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNEXT"
+	}
+}

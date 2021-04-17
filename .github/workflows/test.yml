@@ -9,11 +9,21 @@ jobs:
         with:
           node-version: "15"
 
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
+      - name: Install base dependencies
+        run: |
+          yarn --frozen-lockfile
+
+      - name: Install and build backend
+        working-directory: ./backend
+        run: |
+          yarn --frozen-lockfile
+          tsc
+
+      - name: Install and build frontend
+        working-directory: ./frontend
+        run: |
+          yarn --frozen-lockfile
+          tsc
 
       - name: Lint
         run: yarn lint
-
-      - name: Test build
-        run: tsc -p tsconfig.test.json
