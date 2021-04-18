@@ -9,22 +9,30 @@ export function getFullUrl({ protocol, hostname }: Request) {
 }
 
 export function generateHtml(embed: Embed, req: Request, id?: string) {
-    const oembedUrl = `${getFullUrl(req)}/oembed${id ? `/${id}.json` : `?${querystring.stringify(embed.oembed)}`}`;
+    const url = getFullUrl(req);
+    const query = id ? `/${id}.json` : `?${querystring.stringify(embed.oembed)}`;
+    const oembedUrl = `${url}/oembed${query}`;
+    const redirect = `${url}/view${query}`;
+
+    const elements = [] as string[];
+    if (embed.color) elements.push(`<meta name="theme-color" content="#${embed.color}">`);
+    if (embed.oembed.provider_name) elements.push(`<meta property="og:site_name" content="${htmlEncode(embed.oembed.provider_name)}">`);
+    ["title", "description", "image"].forEach(v => {
+        const val = embed[v as "title"];
+        if (val) elements.push(`<meta property="og:${v}" content="${htmlEncode(val)}">`);
+    });
+
     return `<!DOCTYPE html>
     <html>
         <head>
-            ${embed.title ? `<meta property="og:title" content="${htmlEncode(embed.title)}">` : ""}
-            ${embed.description ? `<meta property="og:description" content="${htmlEncode(embed.description)}">` : ""}
-            ${embed.image ? `<meta property="og:image" content="${htmlEncode(embed.image)}">` : ""}
-            ${embed.color ? `<meta name="theme-color" content="#${embed.color}">` : ""}
+            ${elements.join("\n")}
             <link type="application/json+oembed" href=${oembedUrl}>
         </head>
         <body>
-            <script>location.replace("/")</script>
+            <script>location.href = "${redirect}";</script>
         </body>
     </html>`;
 }
-// ${/* embed.siteName ? `<meta property="og:site_name" content="${htmlEncode(embed.siteName)}">` : "" */}
 
 export function exists(fileName: string) {
     return access(fileName)
