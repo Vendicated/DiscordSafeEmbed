@@ -54,7 +54,7 @@ export function parseEmbed(values: Record<string, string>) {
                 const color = value === "RANDOM" ? Math.floor(Math.random() * (0xffffff + 1)) : parseInt(value.replace("#", ""), 16);
                 if (isNaN(color)) throw new EmbedParseError(`Colour must be valid hex colour, received ${value}`);
                 else if (color < 0 || color > 0xffffff) throw new EmbedParseError(`Colour must be between 0 and #FFFFFF, received #${color}`);
-                embed.color = color;
+                embed.color = color.toString(16);
                 break;
             }
             case "image":

@@ -2,7 +2,7 @@ export interface Embed {
     title?: string;
     description?: string;
     image?: string;
-    color?: number;
+    color?: string;
     oembed: OEmbed;
 }
 
