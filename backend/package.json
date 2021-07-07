@@ -16,6 +16,6 @@
         "nanoid": "^3.1.22"
     },
     "devDependencies": {
-        "@types/express": "^4.17.11"
+        "@types/express": "^4.17.13"
     }
 }
