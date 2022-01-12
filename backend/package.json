@@ -13,7 +13,7 @@
     "dependencies": {
         "express": "^4.17.1",
         "htmlencode": "^0.0.4",
-        "nanoid": "^3.1.22"
+        "nanoid": "^3.1.31"
     },
     "devDependencies": {
         "@types/express": "^4.17.11"
